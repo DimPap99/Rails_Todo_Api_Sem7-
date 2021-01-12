@@ -306,3 +306,104 @@ FOREIGN KEY ("todo_id")
   [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
   [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "333cfecc53426c34a498bb843eabe133f845b62b"], ["created_at", "2021-01-10 14:53:13.856736"], ["updated_at", "2021-01-10 14:53:13.856736"]]
   [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/todos" for 127.0.0.1 at 2021-01-13 00:33:24 +0200
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by TodosController#index as */*
+Completed 422 Unprocessable Entity in 2ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 410)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-13 00:33:39 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (1.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$QQjEYxNC9V/frnHLANe4NOjcSQ8M22TiOw.1icH3hJyNdEhr5JDv2"], ["created_at", "2021-01-12 22:33:39.705970"], ["updated_at", "2021-01-12 22:33:39.705970"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+Completed 201 Created in 803ms (Views: 0.4ms | ActiveRecord: 5.8ms | Allocations: 9907)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-13 00:33:55 +0200
+Processing by TodosController#index as */*
+Completed 422 Unprocessable Entity in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 95)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-13 00:34:27 +0200
+Processing by TodosController#index as */*
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 169)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-13 00:35:37 +0200
+Processing by TodosController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (1.4ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 29ms (Views: 11.2ms | ActiveRecord: 2.5ms | Allocations: 8412)
+
+
+Started POST "/todos" for 127.0.0.1 at 2021-01-13 00:36:25 +0200
+Processing by TodosController#create as HTML
+  Parameters: {"title"=>"Beethoven", "todo"=>{"title"=>"Beethoven"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+[31mUnpermitted parameter: :todo[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/todos_controller.rb:14:in `create'
+  [1m[36mTodo Create (0.5ms)[0m  [1m[32mINSERT INTO "todos" ("title", "created_by", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "Beethoven"], ["created_by", "1"], ["created_at", "2021-01-12 22:36:25.521482"], ["updated_at", "2021-01-12 22:36:25.521482"]]
+  ↳ app/controllers/todos_controller.rb:14:in `create'
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/todos_controller.rb:14:in `create'
+Completed 201 Created in 17ms (Views: 0.6ms | ActiveRecord: 3.9ms | Allocations: 5646)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-13 00:36:55 +0200
+Processing by TodosController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.2ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 6ms (Views: 2.8ms | ActiveRecord: 0.4ms | Allocations: 1823)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-13 00:49:22 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "user"=>{"email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+Completed 422 Unprocessable Entity in 440ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 205613)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-13 00:49:53 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+Completed 200 OK in 488ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1401)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-13 00:50:31 +0200
+Processing by TodosController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.4ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 8ms (Views: 3.9ms | ActiveRecord: 0.7ms | Allocations: 1855)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-13 00:50:54 +0200
+Processing by TodosController#index as */*
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 165)
+
+
