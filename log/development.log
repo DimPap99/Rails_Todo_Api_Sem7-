@@ -474,3 +474,583 @@ Processing by TodosController#index as */*
 Completed 200 OK in 8ms (Views: 4.3ms | ActiveRecord: 0.6ms | Allocations: 2031)
 
 
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateSalts (20210114222301)
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "salts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "salt_str" varchar, "token" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210114222301"]]
+  [1m[35m (10.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 00:51:52 +0200
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$t5JmOS/2q2BESA28SkVeU.fe66kgSlDpAZO0AOImg.pgjee73Wxeq"], ["created_at", "2021-01-14 22:51:52.361796"], ["updated_at", "2021-01-14 22:51:52.361796"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 764ms (Views: 0.3ms | ActiveRecord: 7.2ms | Allocations: 11321)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 00:51:56 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$jikMEYbRNMIcWOH3R4BsMeLG0lqVoBJprVhgluKz0BtCheks0eVwy"], ["created_at", "2021-01-14 22:51:56.585317"], ["updated_at", "2021-01-14 22:51:56.585317"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.1ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 745ms (Views: 0.3ms | ActiveRecord: 5.1ms | Allocations: 6570)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:00:18 +0200
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$ruMqXWSvrrmevcx3jP9M5.TpzsHj8qZMXGZcSCAlTw35c7sVWYcuG"], ["created_at", "2021-01-14 23:00:18.418967"], ["updated_at", "2021-01-14 23:00:18.418967"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (3.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:14:in `encode'
+  [1m[36mSalt Create (0.6ms)[0m  [1m[32mINSERT INTO "salts" ("user_id", "salt_str", "token", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["user_id", 1], ["salt_str", "ledzkghkzjykfhdznkpzzlkbdqnyesobdwfqelfiefoppggphh"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTE2MTh9.Ns0NCHefx0enIiktit21MOnEpbzKkKh_1gnoEoYCRdU"], ["created_at", "2021-01-14 23:00:18.941870"], ["updated_at", "2021-01-14 23:00:18.941870"]]
+  ↳ app/lib/json_web_token.rb:14:in `encode'
+  [1m[35m (4.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:14:in `encode'
+Completed 201 Created in 803ms (Views: 0.4ms | ActiveRecord: 9.8ms | Allocations: 18152)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:00:28 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$KntSy7dMVx2DCazXzZVZ2.vV/7nK1sKngbOc5KB83yo22GPie1u3e"], ["created_at", "2021-01-14 23:00:28.995840"], ["updated_at", "2021-01-14 23:00:28.995840"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 500 Internal Server Error in 755ms (ActiveRecord: 4.8ms | Allocations: 8658)
+
+
+  
+NoMethodError (undefined method `salt_record' for #<Salt:0x000055f0fc0d9470>
+Did you mean?  salt_str):
+  
+app/lib/json_web_token.rb:18:in `encode'
+app/auth/authenticate_user.rb:10:in `call'
+app/controllers/users_controller.rb:8:in `create'
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:00:54 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$2W7K6mb1S7xWMzksJpT5c.nozXwORKqCqGdJBoDK1uaKMsTAGeCEe"], ["created_at", "2021-01-14 23:00:55.079067"], ["updated_at", "2021-01-14 23:00:55.079067"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 771ms (Views: 0.3ms | ActiveRecord: 7.5ms | Allocations: 13540)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:00:58 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$a/USrlXMBQuv.Qjwgc8uiuxJzKPS3rh4UOPuat1ErAiuktZWvIHXC"], ["created_at", "2021-01-14 23:00:58.901323"], ["updated_at", "2021-01-14 23:00:58.901323"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 741ms (Views: 0.2ms | ActiveRecord: 4.9ms | Allocations: 6583)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:02:00 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$TqLlE1fx899TTLGJKT4cxenDQGR0WbIdWx9Dh6VjwvvRKwhsr9z/S"], ["created_at", "2021-01-14 23:02:00.400834"], ["updated_at", "2021-01-14 23:02:00.400834"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (5.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 825ms (Views: 0.3ms | ActiveRecord: 8.7ms | Allocations: 13392)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:02:05 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$SoD3feQbp5.vEM.8OddVxedx96rLvUtXhftYZ4zFPuMgLuVRk4zGC"], ["created_at", "2021-01-14 23:02:06.156037"], ["updated_at", "2021-01-14 23:02:06.156037"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 763ms (Views: 0.2ms | ActiveRecord: 5.3ms | Allocations: 6583)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:03:04 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$8Ha1uehQLFWe3oiPEcblFuaoHnuB/c1zx6RNWgtAWEbGd5URMUxV."], ["created_at", "2021-01-14 23:03:04.392165"], ["updated_at", "2021-01-14 23:03:04.392165"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (5.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 790ms (Views: 0.3ms | ActiveRecord: 9.0ms | Allocations: 13399)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:03:05 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$GAhRPSaQSrqAX78GhIKUl.HQvje17tAnFdHlCN28y5v3Tg5Ik/2Di"], ["created_at", "2021-01-14 23:03:06.132243"], ["updated_at", "2021-01-14 23:03:06.132243"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 748ms (Views: 0.2ms | ActiveRecord: 5.2ms | Allocations: 6591)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:04:32 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTE3ODZ9.OjtJwG9T0VSSxkxxkM_6x4-w8Es9KsjgZd_ItzJICq0"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:28:in `decode'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.4ms | Allocations: 1373)
+
+
+  
+NoMethodError (undefined method `random_salt' for nil:NilClass):
+  
+app/lib/json_web_token.rb:30:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:06:00 +0200
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTE3ODZ9.OjtJwG9T0VSSxkxxkM_6x4-w8Es9KsjgZd_ItzJICq0"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:29:in `decode'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.6ms | Allocations: 2326)
+
+
+  
+NoMethodError (undefined method `salt_str' for nil:NilClass):
+  
+app/lib/json_web_token.rb:31:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:06:37 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTE3ODZ9.OjtJwG9T0VSSxkxxkM_6x4-w8Es9KsjgZd_ItzJICq0"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:29:in `decode'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.7ms | Allocations: 2329)
+
+
+  
+NoMethodError (undefined method `salt_str' for nil:NilClass):
+  
+app/lib/json_web_token.rb:32:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:08:18 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTE3ODZ9.OjtJwG9T0VSSxkxxkM_6x4-w8Es9KsjgZd_ItzJICq0"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:29:in `decode'
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 1.0ms | Allocations: 2329)
+
+
+  
+NoMethodError (undefined method `salt_str' for nil:NilClass):
+  
+app/lib/json_web_token.rb:32:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:08:42 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.6ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$KE3O5VO3iy68tejHz1pSMO7YgHOTPuaRweMtMrGGk84kIGKtKXY1G"], ["created_at", "2021-01-14 23:08:42.484094"], ["updated_at", "2021-01-14 23:08:42.484094"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 785ms (Views: 0.2ms | ActiveRecord: 7.8ms | Allocations: 13438)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:09:01 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTIxMjN9.Dg56526arvWcU4YTa53cNmOEns2ns4Dd-ymRFeZjnbo"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:30:in `decode'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.4ms | Allocations: 1364)
+
+
+  
+NoMethodError (undefined method `salt_str' for nil:NilClass):
+  
+app/lib/json_web_token.rb:33:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:10:13 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTIxMjN9.Dg56526arvWcU4YTa53cNmOEns2ns4Dd-ymRFeZjnbo"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.7ms | Allocations: 2331)
+
+
+  
+NoMethodError (undefined method `salt_str' for nil:NilClass):
+  
+app/lib/json_web_token.rb:34:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:10:14 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$/EblqAaWJJn2WoKO48qr/eatnkVQ3iCd1eJnKiIkQDxnhHGqerAle"], ["created_at", "2021-01-14 23:10:15.089065"], ["updated_at", "2021-01-14 23:10:15.089065"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+Completed 201 Created in 772ms (Views: 0.3ms | ActiveRecord: 6.9ms | Allocations: 12721)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:10:27 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTIyMTV9.pB9izTU0GAdLgaqOMwJR1cDM8DW17BNSt7dnl74dMxc"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.2ms | Allocations: 1242)
+
+
+  
+NoMethodError (undefined method `salt_str' for nil:NilClass):
+  
+app/lib/json_web_token.rb:34:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:11:49 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."salt_str" = ? LIMIT ?[0m  [["salt_str", "ledzkghkzjykfhdznkpzzlkbdqnyesobdwfqelfiefoppggphh"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 46ms (Views: 10.3ms | ActiveRecord: 3.7ms | Allocations: 15658)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:12:53 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTIyMTV9.pB9izTU0GAdLgaqOMwJR1cDM8DW17BNSt7dnl74dMxc"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.6ms | Allocations: 2335)
+
+
+  
+NoMethodError (undefined method `salt_str' for nil:NilClass):
+  
+app/lib/json_web_token.rb:34:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:13:18 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "ledzkghkzjykfhdznkpzzlkbdqnyesobdwfqelfiefoppggphh"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.9ms | Allocations: 2332)
+
+
+  
+NoMethodError (undefined method `token' for nil:NilClass):
+  
+app/lib/json_web_token.rb:32:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:13:26 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."salt_str" = ? LIMIT ?[0m  [["salt_str", "ledzkghkzjykfhdznkpzzlkbdqnyesobdwfqelfiefoppggphh"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 42ms (Views: 9.6ms | ActiveRecord: 3.5ms | Allocations: 13925)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:13:45 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.5ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."salt_str" = ? LIMIT ?[0m  [["salt_str", "ledzkghkzjykfhdznkpzzlkbdqnyesobdwfqelfiefoppggphh"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:30:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 41ms (Views: 9.2ms | ActiveRecord: 3.9ms | Allocations: 13887)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:14:10 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."salt_str" = ? LIMIT ?[0m  [["salt_str", "ledzkghkzjykfhdznkpzzlkbdqnyesobdwfqelfiefoppggphh"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:30:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.2ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 9ms (Views: 3.4ms | ActiveRecord: 0.6ms | Allocations: 2482)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:16:23 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$e27Wy2NSgBXOaIEhlXMyUusuD/4CLG46bXOY5I4uB.Bdn29X4BgX."], ["created_at", "2021-01-14 23:16:24.115875"], ["updated_at", "2021-01-14 23:16:24.115875"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "hyxbzmyhostkxjvudfhjyrihtvrbuysnsemcirxmgqneemwmuy"], ["updated_at", "2021-01-14 23:16:24.621824"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (6.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 201 Created in 769ms (Views: 0.3ms | ActiveRecord: 14.0ms | Allocations: 19245)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:16:47 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."salt_str" = ? LIMIT ?[0m  [["salt_str", "ledzkghkzjykfhdznkpzzlkbdqnyesobdwfqelfiefoppggphh"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.3ms | Allocations: 1367)
+
+
+  
+NoMethodError (undefined method `token' for nil:NilClass):
+  
+app/lib/json_web_token.rb:33:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:17:37 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTI1ODR9.-IGYu7L7Fwmu9dOmIVPkOQzAYxlfjwyBsu1N7z-3UKY"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.7ms | Allocations: 2351)
+
+
+  
+NoMethodError (undefined method `token' for nil:NilClass):
+  
+app/lib/json_web_token.rb:33:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:18:27 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTI1ODR9.-IGYu7L7Fwmu9dOmIVPkOQzAYxlfjwyBsu1N7z-3UKY"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 1.3ms | Allocations: 2351)
+
+
+  
+NoMethodError (undefined method `token' for nil:NilClass):
+  
+app/lib/json_web_token.rb:33:in `decode'
+app/auth/authorize_api_request.rb:33:in `decoded_auth_token'
+app/auth/authorize_api_request.rb:21:in `user'
+app/auth/authorize_api_request.rb:10:in `call'
+app/controllers/application_controller.rb:14:in `authorize_request'
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:18:53 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.6ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:31:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 45ms (Views: 10.3ms | ActiveRecord: 4.2ms | Allocations: 13935)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-15 01:20:51 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$Zd6UfIIRrn6ua1dycE38jO4ofBZ7yg02rVzJPtvtw6P2slQVQr7j."], ["created_at", "2021-01-14 23:20:52.324351"], ["updated_at", "2021-01-14 23:20:52.324351"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:27:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "nebmaiqmuhmlqxqraspynxdcgtptfboywgbhpympgcuckygopw"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTI4NTJ9.dNnPOACchA0aXzHW_D4PEf9r7POaO9rauvo0Czu9pnw"], ["updated_at", "2021-01-14 23:20:52.837486"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:27:in `encode'
+  [1m[35m (4.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:27:in `encode'
+Completed 201 Created in 773ms (Views: 0.3ms | ActiveRecord: 12.7ms | Allocations: 18649)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:21:14 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:36:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 21ms (Views: 11.1ms | ActiveRecord: 1.8ms | Allocations: 6204)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-15 01:21:31 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA3NTI4NTJ9.dNnPOACchA0aXzHW_D4PEf9r7POaO9rauvo0Czu9pnw"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:36:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 43ms (Views: 8.9ms | ActiveRecord: 3.4ms | Allocations: 13911)
+
+
