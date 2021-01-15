@@ -4,7 +4,7 @@ class JsonWebToken
 
   def self.encode(payload, exp = 24.hours.from_now)
     # set expiry to 24 hours from creation time
-
+    if payload[:user_id] != nil
     salt_record = Salt.where(user_id: payload[:user_id]).take
     payload[:exp] = exp.to_i
     if salt_record == nil
@@ -19,7 +19,11 @@ class JsonWebToken
       salt_record.save
       token
     end
-    
+  else
+    payload[:exp] = exp.to_i
+    # sign token with application secret
+    JWT.encode(payload, HMAC_SECRET)
+  end
     # sign token with application secret
     
   end
@@ -30,7 +34,7 @@ class JsonWebToken
     if salt_record == nil
       raise ExceptionHandler::InvalidToken, "Not enough or too many segments"
     else
-    p salt_record
+    
     # get payload; first index in decoded Array
     body = JWT.decode(token, salt_record.salt_str)[0]
     HashWithIndifferentAccess.new body

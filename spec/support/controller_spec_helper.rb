@@ -2,6 +2,8 @@
 module ControllerSpecHelper
   # generate tokens from user id
   def token_generator(user_id)
+    
+    if user_id != nil
     payload = Hash.new
     payload[:user_id] = user_id
     salt_record = Salt.where(user_id: user_id).take
@@ -17,10 +19,14 @@ module ControllerSpecHelper
       salt_record.save
       salt_record.token
     end
+  else
+    JsonWebToken.encode(user_id: user_id)
+  end
   end
 
   # generate expired tokens from user id
   def expired_token_generator(user_id)
+    if user_id != nil
     payload = Hash.new
     payload[:user_id] = user_id
     payload[:exp] = Time.now.to_i - 10
@@ -37,6 +43,9 @@ module ControllerSpecHelper
       salt_record.save
       salt_record.token
     end
+  else
+    JsonWebToken.encode({ user_id: user_id }, (Time.now.to_i - 10))
+  end
     
   end
 
