@@ -2,14 +2,16 @@ class LogoutController < ApplicationController
     skip_before_action :authorize_request, only: :logout
   # return auth token once user is authenticated
   def logout
-    
-    #auth_token = request.headers['Authorization']
-    
-    
+    #auth_token = request.headers['Authorization'
     @current_user = (AuthorizeApiRequest.new(request.headers).call)[:user]
-    p @current_user.id
-    JsonWebToken.invalidate(@current_user.id)
-    json_response({message: "You have succesfully logged out..."})
+    # p @current_user.id
+    result =  JsonWebToken.invalidate(@current_user.id)
+    if result != nil
+      #json_response(message: "/Invalid credentials/")
+      json_response({message: "You have succesfully logged out...", status_code: '200'})
+    else
+      json_response({message: "Something went wrong...", status_code: '422'})
+    end
     # puts "finished"
     # p @current_user
     #u#ser  = LogoutUser.new(auth_params[:token])

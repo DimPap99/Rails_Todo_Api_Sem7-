@@ -4,9 +4,7 @@ class AuthenticationController < ApplicationController
   # return auth token once user is authenticated
   def authenticate
     # if headers['Authorization'].present?
-    #   puts "gamw to spiti sou"
     # end
-    p http_auth_header
     auth_token =
       AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
     json_response(auth_token: auth_token)

@@ -9,37 +9,35 @@ RSpec.describe 'Logout' do
     # set headers for authorization
     let(:headers) { valid_headers.except('Authorization') }
     # set test valid and invalid credentials
-    let(:valid_credentials) do
+    let(:valid_token) do
       {
-        email: user.email,
-        password: user.password
+        token: (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+        
       }.to_json
     end
-    let(:invalid_credentials) do
+    let(:invalid_token) do
       {
-        email: Faker::Internet.email,
-        password: Faker::Internet.password
+        token: nil
       }.to_json
     end
 
-    # set request.headers to our custon headers
-    # before { allow(request).to receive(:headers).and_return(headers) }
-
+    
     # returns auth token when request is valid
     context 'When request is valid' do
-      before { post '/auth/logout', params: valid_credentials, headers: headers }
+      before { post '/auth/logout', params: valid_token, headers: headers }
        
-      it 'returns a message' do
+      it 'returns status code 200' do
         expect(json['message']).not_to be_nil
       end
     end
 
     # returns failure message when request is invalid
     context 'When request is invalid' do
-      before { post '/auth/logout', params: invalid_credentials, headers: headers }
+      before { post '/auth/logout', params: invalid_token, headers: headers }
 
       it 'returns a failure message' do
-        expect(json['message']).to match(/Invalid credentials/)
+        p json['message']
+        expect(json['message']).to match("Missing token")
       end
     end
   end

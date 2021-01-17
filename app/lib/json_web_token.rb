@@ -52,11 +52,11 @@ class JsonWebToken
     salt_record = Salt.where(user_id: user_id).take
     #p salt_record
     if salt_record == nil
-      return " ble"
+      return nil
     else
       salt_record.salt_str = random_salt = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
       salt_record.save
-      return " ble"
+      return 200
     end
   end
 
