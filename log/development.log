@@ -1054,3 +1054,1718 @@ Processing by TodosController#index as */*
 Completed 200 OK in 43ms (Views: 8.9ms | ActiveRecord: 3.4ms | Allocations: 13911)
 
 
+Started POST "/signup" for 127.0.0.1 at 2021-01-17 03:02:42 +0200
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$rma.FLExckxcsYEyr4guC.Lp2C8JT2.1kO5RFGV9Gn8ufR4CrblbK"], ["created_at", "2021-01-17 01:02:42.694909"], ["updated_at", "2021-01-17 01:02:42.694909"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (10.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "vqitpocbzssxtwdnbltcjekxijugnngfokizwdhnznmxgwxktf"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["updated_at", "2021-01-17 01:02:43.211950"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (5.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 201 Created in 776ms (Views: 0.4ms | ActiveRecord: 19.9ms | Allocations: 19443)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2021-01-17 03:03:15 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/auth/logout"):
+  
+actionpack (6.0.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.4) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/auth/login" for 127.0.0.1 at 2021-01-17 03:03:51 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/auth/login"):
+  
+actionpack (6.0.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.4) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:05:03 +0200
+Processing by AuthenticationController#authenticate as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 893)
+
+
+Started POST "/auth/logOUT" for 127.0.0.1 at 2021-01-17 03:05:12 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/auth/logOUT"):
+  
+actionpack (6.0.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.4) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:05:22 +0200
+Processing by LogoutController#logout as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/logout_controller.rb:7:in `logout'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 924)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:07:50 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 225)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 2)):
+  
+app/auth/authenticate_user.rb:3:in `initialize'
+app/controllers/logout_controller.rb:7:in `new'
+app/controllers/logout_controller.rb:7:in `logout'
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:08:02 +0200
+Processing by LogoutController#logout as */*
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 132)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 2)):
+  
+app/auth/authenticate_user.rb:3:in `initialize'
+app/controllers/logout_controller.rb:7:in `new'
+app/controllers/logout_controller.rb:7:in `logout'
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:09:31 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 256)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 2)):
+  
+app/auth/authenticate_user.rb:3:in `initialize'
+app/controllers/logout_controller.rb:7:in `new'
+app/controllers/logout_controller.rb:7:in `logout'
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:11:47 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 272)
+
+
+  
+ArgumentError (wrong number of arguments (given 1, expected 2)):
+  
+app/auth/authenticate_user.rb:3:in `initialize'
+app/controllers/logout_controller.rb:7:in `new'
+app/controllers/logout_controller.rb:7:in `logout'
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:13:30 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+SyntaxError (/home/dimpap/Desktop/Rails_Todo_Api_Sem7-/app/controllers/logout_controller.rb:7: syntax error, unexpected ']', expecting ')'
+...n = JsonWebToken.decode(:token])
+...                              ^
+):
+  
+app/controllers/logout_controller.rb:7: syntax error, unexpected ']', expecting ')'
+app/controllers/logout_controller.rb:7: syntax error, unexpected ']', expecting ')'
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:13:50 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "token"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+Completed 422 Unprocessable Entity in 5ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 1714)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:14:44 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "token"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+Completed 422 Unprocessable Entity in 6ms (Views: 0.3ms | ActiveRecord: 0.6ms | Allocations: 1839)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:15:23 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.7ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "token"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+Completed 422 Unprocessable Entity in 7ms (Views: 0.2ms | ActiveRecord: 1.1ms | Allocations: 1728)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:16:26 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "token"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+Completed 422 Unprocessable Entity in 28ms (Views: 0.2ms | ActiveRecord: 2.2ms | Allocations: 9980)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:16:52 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 34ms (ActiveRecord: 2.5ms | Allocations: 9194)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:17:09 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 24ms (ActiveRecord: 2.5ms | Allocations: 9182)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:18:23 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 25ms (ActiveRecord: 2.2ms | Allocations: 9176)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:18:41 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 26ms (ActiveRecord: 2.2ms | Allocations: 9180)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:18:55 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 27ms (ActiveRecord: 2.3ms | Allocations: 9306)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:21:51 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 26ms (ActiveRecord: 2.1ms | Allocations: 9207)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:22:01 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 26ms (ActiveRecord: 2.6ms | Allocations: 9139)
+
+
+Started POST "/todo" for 127.0.0.1 at 2021-01-17 03:23:16 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+ActionController::RoutingError (No route matches [POST] "/todo"):
+  
+actionpack (6.0.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.4) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/todos" for 127.0.0.1 at 2021-01-17 03:23:24 +0200
+Processing by TodosController#create as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 422 Unprocessable Entity in 230ms (Views: 0.3ms | ActiveRecord: 3.1ms | Allocations: 219699)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 03:23:36 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzE3NjN9.ASQC2q4_7CWL_lJDFmq2EY8VzadgyreZWZ82XuU661c"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:33:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.4ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 11ms (Views: 4.8ms | ActiveRecord: 0.9ms | Allocations: 2680)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 03:24:22 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+Completed 204 No Content in 191ms (ActiveRecord: 0.0ms | Allocations: 15145)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-17 03:26:35 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$PxGXN5qsC8x/2yEZ2k6qjumPJ8x2iIMTA3NV1XH/Vatw267RBrAm2"], ["created_at", "2021-01-17 01:26:35.486122"], ["updated_at", "2021-01-17 01:26:35.486122"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (5.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "odlwmfgumkbrhazkqppavbvtntiezmzedrjevawkdnmemjdmcp"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzMxOTV9.sGTLgm-hzg4J1hAowVCBwcuDPp5pGP9e8WmsAtliQaA"], ["updated_at", "2021-01-17 01:26:35.991587"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (4.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 201 Created in 765ms (Views: 0.4ms | ActiveRecord: 14.1ms | Allocations: 19169)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:26:58 +0200
+Processing by AuthenticationController#authenticate as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 892)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:27:31 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@gmail.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 4ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 798)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:27:52 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@gmail.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.1ms | Allocations: 798)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:28:21 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "fjiltvbdwfsktvwwxncxgofpqbxotyixbrqhtdbrzunahjsocc"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzMzMDF9.3y-QtoaErUudZ3LCUdZTtuqz0rATX0q-nKtVvWmjRno"], ["updated_at", "2021-01-17 01:28:21.701986"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (5.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 200 OK in 488ms (Views: 0.8ms | ActiveRecord: 6.1ms | Allocations: 6847)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:29:08 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "iaqfsfqtvqijsmtxilqkqtimmxnyqmyddbkyvriimxzywvxany"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzMzNDl9.xfq_JYYmTU_Pe4_chBhWyrC-DbLNGpyga8GyGE3tHn0"], ["updated_at", "2021-01-17 01:29:09.492407"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (5.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 200 OK in 514ms (Views: 0.4ms | ActiveRecord: 8.0ms | Allocations: 14970)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:29:22 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "dnbzjiuurpwsdiocvuhmhgzdqgxpnwuuekwccwpplglmrpavqc"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzMzNjN9.D7Yvsj3RSZhY8NESp6-EZdP8zvjUla7l2bGVyhf0y4w"], ["updated_at", "2021-01-17 01:29:23.087736"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (2.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 200 OK in 505ms (Views: 0.2ms | ActiveRecord: 3.1ms | Allocations: 6455)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:29:24 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "acmkspeqsmzvzcbzkymluyibbrivncrsgckzybkeqkkjkcwvbg"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzMzNjV9.W2Wt46VtwJwP-vOY1LR0o5tqt_dAzIEQH_Q4hS2Inzg"], ["updated_at", "2021-01-17 01:29:25.209379"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (4.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 200 OK in 489ms (Views: 0.3ms | ActiveRecord: 5.1ms | Allocations: 7152)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:29:27 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "piimqoexwaxbxuvsmgsrrpibwgreuoikqzwaxrtvkbrrerlygy"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzMzNjh9.RqA1IXuV1BgJFKy94_2qxjpUs9jIAYk3tqS1cHJW354"], ["updated_at", "2021-01-17 01:29:28.065513"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 200 OK in 487ms (Views: 0.3ms | ActiveRecord: 4.6ms | Allocations: 7752)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:29:38 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "lsibadksqyofssdootjxyvxxfnwnsjnxnglgjooctabbduyhqu"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzMzNzl9.56XJyAN9k_CDXICZbIlQO1Q14ZOY3YjonJ7mzZUxVuI"], ["updated_at", "2021-01-17 01:29:39.175686"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 200 OK in 517ms (Views: 0.3ms | ActiveRecord: 8.2ms | Allocations: 14957)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:30:01 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:8:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "dhfmdzllkzgdiegbxytbgwawidplqkedvezpqivxixqxchwrvy"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM0MDF9.gHqfNzAeAhG2trDxdm_R8apWPEoEH1lCGpE7VAYd--Q"], ["updated_at", "2021-01-17 01:30:01.951997"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+  [1m[35m (4.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:19:in `encode'
+Completed 200 OK in 509ms (Views: 0.4ms | ActiveRecord: 7.6ms | Allocations: 14519)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:30:31 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.7ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "odahyismcalhhkisfkvrespqhpysyyenincprkbxgwhgmjzxpf"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM0MzJ9.chFOED1XoRRo95KdzCyBAWyl4G0l-EzEKXaUKCQvAhY"], ["updated_at", "2021-01-17 01:30:32.272836"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (7.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 523ms (Views: 0.3ms | ActiveRecord: 10.5ms | Allocations: 15895)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:30:44 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "hybpvcqzefxzukvhbivsgndijggciqzpnwcfhnwbzpzffwwigm"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM0NDR9.qUO8RVC_tKIkmJVNM35W3WX5QQPsOmgZ7zBo0VaB-Vw"], ["updated_at", "2021-01-17 01:30:44.630092"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 521ms (Views: 0.4ms | ActiveRecord: 8.3ms | Allocations: 14520)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:30:53 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "yrgfmlkixfduforjwpvlshjmsjivdpfohwdhjnengpmxuvqokf"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM0NTN9.tipfFrz-TwUdl6uj7Xv6ZoOX1Tg0kWpeROysP7D1iGs"], ["updated_at", "2021-01-17 01:30:53.523861"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 488ms (Views: 0.3ms | ActiveRecord: 4.8ms | Allocations: 7750)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:30:56 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "zconmuchecewmradlupavonmskbqtmhpishgjdsedzclefiaif"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM0NTZ9.QxnNOH37mv12HoK22vzH-iyFgOfCJ9EkIAeX5DR_kZE"], ["updated_at", "2021-01-17 01:30:56.642953"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 496ms (Views: 0.3ms | ActiveRecord: 4.9ms | Allocations: 7190)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:30:59 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "wnuuaaaxnnfuzddnlwhzcotnfqqghtjcevsejpofvajvwvoach"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM0NjB9.N7aIzlLnQLc5gBIy7TwkU4wF2XETbTjEmGOxW1_aCak"], ["updated_at", "2021-01-17 01:31:00.356871"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 501ms (Views: 0.6ms | ActiveRecord: 5.0ms | Allocations: 7154)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:31:09 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:20:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "oqnymzzjzilpqhvfodgyqverxdjbtbtxvdypxioeapfqwuzncg"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM0Njl9.lipiqYIBSvDx2d0kTe-EBiA9A1mx5mEKN0CAidKKck0"], ["updated_at", "2021-01-17 01:31:09.726947"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 523ms (Views: 0.7ms | ActiveRecord: 6.9ms | Allocations: 15865)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:32:18 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "uminubmdiikbxkhkhduuwhxihsuqtjqhgkzucroaltbstwwhaa"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM1Mzh9.SKNjfwKK2OQwlZr7618vxZGiGNPqvR9oJ_dJ_06XQLs"], ["updated_at", "2021-01-17 01:32:18.740770"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 517ms (Views: 0.3ms | ActiveRecord: 6.6ms | Allocations: 15092)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:34:17 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "zpdosqwucjfwykrluoenotibwmcfevkhrutlodprxfsuhxjnyc"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM2NTh9.sLzuNidtIYfrB0Pr3WnMf8VUuCRH7DRbILDe2P4uEJU"], ["updated_at", "2021-01-17 01:34:18.310128"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 517ms (Views: 0.3ms | ActiveRecord: 6.7ms | Allocations: 15191)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:34:49 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@gmail.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+Completed 401 Unauthorized in 8ms (Views: 0.4ms | ActiveRecord: 0.7ms | Allocations: 2573)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:35:46 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@gmail.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+Completed 401 Unauthorized in 8ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 2564)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:35:51 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@gmail.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+Completed 401 Unauthorized in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 875)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:36:01 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@gmail.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+Completed 401 Unauthorized in 10ms (Views: 0.2ms | ActiveRecord: 0.9ms | Allocations: 2533)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:36:07 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@gmail.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@gmail.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@gmail.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+Completed 401 Unauthorized in 9ms (Views: 0.3ms | ActiveRecord: 0.7ms | Allocations: 2471)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-17 03:36:19 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$TGK6MhflgrratPgEcH1mF.5HFDHiLU3b4iWm05kV/MXc.mef8/gJG"], ["created_at", "2021-01-17 01:36:19.510437"], ["updated_at", "2021-01-17 01:36:19.510437"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (6.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "zfhjaczwopbnkxaavxhvrsanyrytjbihawfhnvpzpbjsrperug"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM3ODB9.-Z-TQLcmVFWz75fvufRsLxwngVNXd_q7ViDXRN7auIs"], ["updated_at", "2021-01-17 01:36:20.014197"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 201 Created in 758ms (Views: 0.3ms | ActiveRecord: 12.8ms | Allocations: 17360)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:36:49 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "mrmcfsoykpazkclgrksiugqedusiissjddexqpceotwasebirp"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM4MDl9.BahAtyNxaihcIog1IX5AGa2qrh9TqExwUaf8iS7MbGc"], ["updated_at", "2021-01-17 01:36:49.560143"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 495ms (Views: 0.3ms | ActiveRecord: 5.6ms | Allocations: 7149)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:37:00 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "gcoyjnhqwoddytnfbwuakravgfnfpwpbzsffiurbjhgcjjmbfh"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM4MjF9.PjLd2t1xJKImc_55PfEU1K90ObI3x1fNig8oqlIrKF8"], ["updated_at", "2021-01-17 01:37:01.389753"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 522ms (Views: 0.4ms | ActiveRecord: 8.6ms | Allocations: 15787)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:37:53 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad"}}
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "oweamnrgnjyhckvsymedlvybhlniwwserinqijsahbsphjmjob"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM4NzN9.VjgHvonN8o_Bn7hw6-54wrzjChfSyRpmLkRAMj1DC9o"], ["updated_at", "2021-01-17 01:37:53.766111"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 489ms (Views: 0.3ms | ActiveRecord: 5.9ms | Allocations: 6904)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:39:50 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad"}}
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "bphiasyepmhwfkrlzmnafhchbislkdmggecyeewacpjsjmusjh"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM5OTF9.wFBob1l0EwoHha5atB42m9zEa3FarGLu15YVncMAMVU"], ["updated_at", "2021-01-17 01:39:51.172366"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 518ms (Views: 0.3ms | ActiveRecord: 6.8ms | Allocations: 14892)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:41:49 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad"}}
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "zclepwobqprqennzgpftwnakilfiwozcpczyjaeuauhfefibnz"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQxMTB9.opjkOYsKzL5HntoS12Bdv-L_F5lbhEnkjYFB3cV1L6g"], ["updated_at", "2021-01-17 01:41:50.106645"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 522ms (Views: 0.4ms | ActiveRecord: 9.0ms | Allocations: 14946)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:43:44 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+SyntaxError (/home/dimpap/Desktop/Rails_Todo_Api_Sem7-/app/controllers/authentication_controller.rb:20: syntax error, unexpected end-of-input, expecting `end'):
+  
+app/controllers/authentication_controller.rb:20: syntax error, unexpected end-of-input, expecting `end'
+app/controllers/authentication_controller.rb:20: syntax error, unexpected end-of-input, expecting `end'
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:44:12 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad"}}
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "pzsjqdcdkzqdlumgblumprcpfrfzgjybtowprruewgquemgxpd"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQyNTJ9.sV0VVSKoU-upQKkXk2_SOLPg-vTh8vPx_YILlgpvkg8"], ["updated_at", "2021-01-17 01:44:12.795488"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 510ms (Views: 0.3ms | ActiveRecord: 6.7ms | Allocations: 15967)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:44:36 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]", "random"=>"jhasfsad"}}
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+[31mUnpermitted parameters: :random, :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "wpctvfglsblhdzyvixtkltnebgdcodngpgriafxcntxkolvcha"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQyNzZ9._rNKaCF3xSnILEkHFN9aoU6XYu8gUrCX-0W3tR1_3T4"], ["updated_at", "2021-01-17 01:44:36.831154"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 507ms (Views: 0.3ms | ActiveRecord: 8.3ms | Allocations: 14401)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:44:57 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "xxuapeicybcudhjptqcjcodndjvviaihrkbxembcbaseekmada"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQyOTd9.ef9BVPtxYUPPNHcMark-81_7ypM84qT4VP94Is8g6QI"], ["updated_at", "2021-01-17 01:44:57.606375"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 485ms (Views: 0.3ms | ActiveRecord: 4.9ms | Allocations: 6472)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:45:12 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "onwfiuqtzbduwumqcainccfbgtbuirzlhpkzogucivcewpbvgp"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQzMTJ9.RybxLqYWcaYp1vo5rb9vpB_Dvb32Rr8Y-1Oa9GW-mSU"], ["updated_at", "2021-01-17 01:45:12.886911"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 525ms (Views: 0.3ms | ActiveRecord: 8.4ms | Allocations: 15667)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:45:36 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "smlbvkcgsdevmyhiwrvjtzsjfkfcklyypdglaalwrdvuyyyhjx"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQzMzZ9.CdOdr2U8-MXeeLbILkdZzxKyiDQwFIgMabp-Th_7liQ"], ["updated_at", "2021-01-17 01:45:36.799771"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 517ms (Views: 0.3ms | ActiveRecord: 9.4ms | Allocations: 15163)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:45:42 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 500 Internal Server Error in 191ms (ActiveRecord: 0.0ms | Allocations: 61667)
+
+
+  
+NameError (undefined local variable or method `header' for #<AuthenticationController:0x00007f0354b2bd18>
+Did you mean?  headers
+               head):
+  
+app/controllers/authentication_controller.rb:9:in `authenticate'
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:45:52 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "eutwrhlgchghwetnxatwbdtuuahxucsifguffphhjmnxagiwhv"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQzNTJ9.WaHVl7LRRSILNJwT7pDwIyM4MNxY9L0NsB5wPD5e8lk"], ["updated_at", "2021-01-17 01:45:52.626339"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 528ms (Views: 0.4ms | ActiveRecord: 7.8ms | Allocations: 15238)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:46:04 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "vmerpcvhcqtidmdftcsmhprriryqaqkzunzzzqvxgocbtdyqpf"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQzNjR9.ROJiXWVDuPYr-7ttCBzsEW9ixEzrxKktcON1ImoGHQE"], ["updated_at", "2021-01-17 01:46:04.933831"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 519ms (Views: 0.3ms | ActiveRecord: 8.7ms | Allocations: 14818)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:47:00 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 230)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:47:08 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 114)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:47:28 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 92)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:47:48 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 219)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:50:28 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 114)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:51:05 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 218)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:51:15 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 422 Unprocessable Entity in 2ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 219)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:51:40 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "kcvcibcwohevtkwtjwbdhgcyyyjvycehuzyzfdwxdrsenafzpd"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ3MDF9.z_TEXwVV2Wy2FM2hhjPADNSVBuSx_BEYIcWRQK2Fhyk"], ["updated_at", "2021-01-17 01:51:41.539179"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 507ms (Views: 0.3ms | ActiveRecord: 8.6ms | Allocations: 14402)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:52:02 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "yoewudptjpmgcnyqdfvbxjgzfsyonmjdplspwkyapgyndhzmap"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ3MjN9.WJROQGBFRiLJ6m65IVPyZQ8MP_87LC94uADSEVoRNvY"], ["updated_at", "2021-01-17 01:52:03.275519"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 511ms (Views: 0.3ms | ActiveRecord: 8.6ms | Allocations: 15736)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:52:09 +0200
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+Completed 422 Unprocessable Entity in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 219)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:53:00 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "nbgmhfvizpebntmhrraihffqaxlufxzswfmiclcxdiyagjhscx"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ3ODF9.5codSNhHidWoUNET-3rvNJah08sctzliCVZADPHmtNw"], ["updated_at", "2021-01-17 01:53:01.430292"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 524ms (Views: 0.3ms | ActiveRecord: 7.1ms | Allocations: 14801)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:53:36 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.6ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "nqatywhebneugepuynwowhtahsjoltdewslivfyfnvajowzwyk"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ4MTd9.Sv_Vf9YhDwxT4FlNlrEAZUrDd8kUBpn_13-eN5VIU7M"], ["updated_at", "2021-01-17 01:53:37.275973"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 511ms (Views: 0.3ms | ActiveRecord: 8.4ms | Allocations: 14772)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:53:58 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "sdxlgaangomqhlnkzpgphzwdwpgfggjvebazvyiirjovtewlqq"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ4Mzh9.CYgL9P0bEHDpb4LjU8-VtJShsHXINxwgXnDGPSDDdwU"], ["updated_at", "2021-01-17 01:53:58.988237"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 507ms (Views: 0.3ms | ActiveRecord: 7.8ms | Allocations: 14404)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:54:43 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "gjazxtqcpnxezobxvqmuxvoleegszswdszaksstybqntlptbfd"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ4ODR9.nadz4XGEtJ_AbaYziiwclUn87nu1AHLud82BUov9h6s"], ["updated_at", "2021-01-17 01:54:44.184229"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (3.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 516ms (Views: 0.4ms | ActiveRecord: 6.8ms | Allocations: 14778)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:55:40 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "tfdsuhztnkpzmzxadlqefgrwxovdsbhlxjgqbyfcmdxpocbnrf"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ5NDB9.nwnIWMHsLQPtiHGkFwGpaCTWW-xcl2FmH_Z-Icj98HE"], ["updated_at", "2021-01-17 01:55:40.775059"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 489ms (Views: 0.3ms | ActiveRecord: 5.6ms | Allocations: 6808)
+
+
+Started POST "/auth/login" for 127.0.0.1 at 2021-01-17 03:55:53 +0200
+Processing by AuthenticationController#authenticate as HTML
+  Parameters: {"email"=>"ash@email.com", "password"=>"[FILTERED]", "authentication"=>{"email"=>"ash@email.com", "password"=>"[FILTERED]"}}
+[31mUnpermitted parameter: :authentication[0m
+[31mUnpermitted parameter: :authentication[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "trkoazbqumumkdawmhizjksfhwrsyokfmtzzrvcoacgjvbbbtd"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ5NTN9.eVbI91dGPY4lAxmZ80YoxgdT_nCeX1VJBWiWCTkySEE"], ["updated_at", "2021-01-17 01:55:53.926180"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 200 OK in 490ms (Views: 0.3ms | ActiveRecord: 5.3ms | Allocations: 6391)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 03:56:14 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM3ODB9.-Z-TQLcmVFWz75fvufRsLxwngVNXd_q7ViDXRN7uIs"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 4ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 944)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 03:56:24 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM3ODB9.-Z-TQLcmVFWz75fvufRsLxwngVNXd_q7ViDXRN7uIs"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 201ms (Views: 0.7ms | ActiveRecord: 1.1ms | Allocations: 31688)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 03:57:16 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzM3ODB9.-Z-TQLcmVFWz75fvufRsLxwngVNXd_q7ViDXRN7uIs"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.5ms | ActiveRecord: 0.7ms | Allocations: 1876)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 03:57:57 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ5NDB9.nwnIWMHsLQPtiHGkFwGpaCTWW-xcl2FmH_Z-Icj98HE"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 758)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 03:58:19 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ5NDB9.nwnIWMHsLQPtiHGkFwGpaCTWW-xcl2FmH_Z-Icj98HE"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 7ms (Views: 0.4ms | ActiveRecord: 0.8ms | Allocations: 1842)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 03:58:52 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzQ5NDB9.nwnIWMHsLQPtiHGkFwGpaCTWW-xcl2FmH_Z-Icj98HE"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 8ms (Views: 0.3ms | ActiveRecord: 0.8ms | Allocations: 1898)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-17 03:59:42 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$1PuvIFwpgkRqFf7VEFBLW.Aze.myCBRehCYjXHpbZ.8L4T5ZFZGHy"], ["created_at", "2021-01-17 01:59:42.757408"], ["updated_at", "2021-01-17 01:59:42.757408"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (4.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "ckozgmfugzthisbzwjjzeowwwxyitulssfhyplqqoehwsertsl"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["updated_at", "2021-01-17 01:59:43.263263"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (5.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 201 Created in 763ms (Views: 0.4ms | ActiveRecord: 13.6ms | Allocations: 18435)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 04:00:02 +0200
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 33ms (Views: 20.0ms | ActiveRecord: 2.3ms | Allocations: 6133)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 04:00:42 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 42ms (Views: 8.9ms | ActiveRecord: 4.0ms | Allocations: 14056)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 04:00:54 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 41ms (Views: 8.8ms | ActiveRecord: 4.2ms | Allocations: 13925)
+
+
+Started GET "/todos" for 127.0.0.1 at 2021-01-17 04:06:06 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by TodosController#index as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mTodo Load (0.3ms)[0m  [1m[34mSELECT "todos".* FROM "todos" WHERE "todos"."created_by" = ?[0m  [["created_by", "1"]]
+  ↳ app/controllers/concerns/response.rb:3:in `json_response'
+Completed 200 OK in 43ms (Views: 10.1ms | ActiveRecord: 3.7ms | Allocations: 13916)
+
+
+Started POST "/todos" for 127.0.0.1 at 2021-01-17 04:06:43 +0200
+Processing by TodosController#create as HTML
+  Parameters: {"title"=>"rand", "todo"=>{"title"=>"rand"}}
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+[31mUnpermitted parameter: :todo[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/todos_controller.rb:14:in `create'
+  [1m[36mTodo Create (0.6ms)[0m  [1m[32mINSERT INTO "todos" ("title", "created_by", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "rand"], ["created_by", "1"], ["created_at", "2021-01-17 02:06:43.091620"], ["updated_at", "2021-01-17 02:06:43.091620"]]
+  ↳ app/controllers/todos_controller.rb:14:in `create'
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/todos_controller.rb:14:in `create'
+Completed 201 Created in 30ms (Views: 0.5ms | ActiveRecord: 4.3ms | Allocations: 5030)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:07:06 +0200
+Processing by LogoutController#logout as */*
+Completed 204 No Content in 1ms (ActiveRecord: 0.0ms | Allocations: 66)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:07:13 +0200
+Processing by LogoutController#logout as */*
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 38)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:07:15 +0200
+Processing by LogoutController#logout as */*
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms | Allocations: 38)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:08:08 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 26ms (ActiveRecord: 2.1ms | Allocations: 9205)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:08:25 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 28ms (ActiveRecord: 3.4ms | Allocations: 9255)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:09:44 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 164ms (ActiveRecord: 3.3ms | Allocations: 24398)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:10:01 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+Completed 422 Unprocessable Entity in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 220)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:10:44 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 27ms (ActiveRecord: 2.3ms | Allocations: 9234)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:17 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 28ms (ActiveRecord: 2.9ms | Allocations: 9232)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:29 +0200
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 5ms (ActiveRecord: 0.3ms | Allocations: 1405)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:31 +0200
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 7ms (ActiveRecord: 0.5ms | Allocations: 1405)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:32 +0200
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 7ms (ActiveRecord: 0.6ms | Allocations: 1405)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:33 +0200
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 6ms (ActiveRecord: 0.5ms | Allocations: 1405)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:34 +0200
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 7ms (ActiveRecord: 0.5ms | Allocations: 1405)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:35 +0200
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 5ms (ActiveRecord: 0.3ms | Allocations: 1405)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:45 +0200
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.5ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 31ms (ActiveRecord: 4.3ms | Allocations: 9271)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:11:55 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.5ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 55ms (ActiveRecord: 3.6ms | Allocations: 9354)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:15:03 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 204 No Content in 40ms (ActiveRecord: 2.2ms | Allocations: 9365)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:15:28 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+Completed 500 Internal Server Error in 34ms (ActiveRecord: 4.0ms | Allocations: 10713)
+
+
+  
+NameError (undefined local variable or method `user_id' for JsonWebToken:Class):
+  
+app/lib/json_web_token.rb:52:in `invalidate'
+app/controllers/logout_controller.rb:11:in `logout'
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:16:04 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mSalt Load (0.4ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:52:in `invalidate'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:58:in `invalidate'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "eogggmrnghwgpudfdlwdwvmabrhhutsbampyirlauavyqxidny"], ["updated_at", "2021-01-17 02:16:04.203963"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:58:in `invalidate'
+  [1m[35m (3.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:58:in `invalidate'
+Completed 204 No Content in 45ms (ActiveRecord: 8.5ms | Allocations: 14416)
+
+
+Started POST "/auth/todos" for 127.0.0.1 at 2021-01-17 04:16:31 +0200
+  
+ActionController::RoutingError (No route matches [POST] "/auth/todos"):
+  
+actionpack (6.0.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.3.4) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.3.4) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.3.4) lib/action_dispatch/middleware/host_authorization.rb:82:in `call'
+railties (6.0.3.4) lib/rails/engine.rb:527:in `call'
+puma (4.3.7) lib/puma/configuration.rb:228:in `call'
+puma (4.3.7) lib/puma/server.rb:713:in `handle_request'
+puma (4.3.7) lib/puma/server.rb:472:in `process_client'
+puma (4.3.7) lib/puma/server.rb:328:in `block in run'
+puma (4.3.7) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/todos" for 127.0.0.1 at 2021-01-17 04:16:49 +0200
+Processing by TodosController#create as HTML
+  Parameters: {"title"=>"random stuff", "todo"=>{"title"=>"random stuff"}}
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 3ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 853)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:19:04 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzUxODN9.a9SV7Z9btzlTYOMu8pvoBtTgHN6xR5WrFYNooeJ_H8E"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 15ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 4733)
+
+
+Started POST "/signup" for 127.0.0.1 at 2021-01-17 04:19:11 +0200
+Processing by UsersController#create as HTML
+  Parameters: {"name"=>"ash", "email"=>"ash@email.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "user"=>{"name"=>"ash", "email"=>"ash@email.com"}}
+[31mUnpermitted parameter: :user[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password_digest", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "ash"], ["email", "ash@email.com"], ["password_digest", "$2a$12$RWZa65ifksDcwZtHZ2ZfbeAwyLMD03rOT0BEqgogkAihBlIg6m45O"], ["created_at", "2021-01-17 02:19:12.218648"], ["updated_at", "2021-01-17 02:19:12.218648"]]
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[35m (3.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:7:in `create'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ash@email.com"], ["LIMIT", 1]]
+  ↳ app/auth/authenticate_user.rb:19:in `user'
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:9:in `encode'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[36mSalt Update (0.4ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "token" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "unokoasjlwqdzjcegatcubtoewreygohceqylnfciyemwkulpc"], ["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzYzNTJ9.q9zOc7xlhQLOqC6sKLTt1qkCUMS798x0xOf6Op6LtsM"], ["updated_at", "2021-01-17 02:19:12.714069"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+  [1m[35m (4.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:20:in `encode'
+Completed 201 Created in 755ms (Views: 0.4ms | ActiveRecord: 10.9ms | Allocations: 14236)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:19:33 +0200
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzYzNTJ9.q9zOc7xlhQLOqC6sKLTt1qkCUMS798x0xOf6Op6LtsM"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/auth/authorize_api_request.rb:21:in `user'
+  [1m[36mSalt Load (0.2ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."user_id" = ? LIMIT ?[0m  [["user_id", 1], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:52:in `invalidate'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/lib/json_web_token.rb:58:in `invalidate'
+  [1m[36mSalt Update (0.5ms)[0m  [1m[33mUPDATE "salts" SET "salt_str" = ?, "updated_at" = ? WHERE "salts"."id" = ?[0m  [["salt_str", "mljszplvxoxmunetfixbdxlvrrsbxcljotudglfpjucyxodhuf"], ["updated_at", "2021-01-17 02:19:33.625758"], ["id", 1]]
+  ↳ app/lib/json_web_token.rb:58:in `invalidate'
+  [1m[35m (5.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/lib/json_web_token.rb:58:in `invalidate'
+Completed 200 OK in 23ms (Views: 0.3ms | ActiveRecord: 6.8ms | Allocations: 6980)
+
+
+Started POST "/auth/logout" for 127.0.0.1 at 2021-01-17 04:21:22 +0200
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by LogoutController#logout as */*
+  [1m[36mSalt Load (0.3ms)[0m  [1m[34mSELECT "salts".* FROM "salts" WHERE "salts"."token" = ? LIMIT ?[0m  [["token", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2MTA5MzYzNTJ9.q9zOc7xlhQLOqC6sKLTt1qkCUMS798x0xOf6Op6LtsM"], ["LIMIT", 1]]
+  ↳ app/lib/json_web_token.rb:34:in `decode'
+Completed 422 Unprocessable Entity in 16ms (Views: 0.2ms | ActiveRecord: 1.4ms | Allocations: 4686)
+
+

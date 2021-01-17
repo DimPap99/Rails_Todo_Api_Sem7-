@@ -3,6 +3,7 @@ class JsonWebToken
   HMAC_SECRET = Rails.application.secrets.secret_key_base
 
   def self.encode(payload, exp = 24.hours.from_now)
+    
     # set expiry to 24 hours from creation time
     if payload[:user_id] != nil
     salt_record = Salt.where(user_id: payload[:user_id]).take
@@ -29,7 +30,7 @@ class JsonWebToken
   end
 
   def self.decode(token)
-   
+    
     salt_record = Salt.where(token: token).take
     if salt_record == nil
       raise ExceptionHandler::InvalidToken, "Not enough or too many segments"
@@ -44,4 +45,19 @@ class JsonWebToken
     # raise custom error to be handled by custom handler
     raise ExceptionHandler::InvalidToken, e.message
   end
+
+
+  def self.invalidate(user_id)
+    #p user_id
+    salt_record = Salt.where(user_id: user_id).take
+    #p salt_record
+    if salt_record == nil
+      return " ble"
+    else
+      salt_record.salt_str = random_salt = (0...50).map { ('a'..'z').to_a[rand(26)] }.join
+      salt_record.save
+      return " ble"
+    end
+  end
+
 end
