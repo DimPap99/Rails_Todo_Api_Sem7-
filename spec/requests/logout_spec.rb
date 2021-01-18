@@ -17,27 +17,60 @@ RSpec.describe 'Logout' do
     end
     let(:invalid_token) do
       {
-        token: nil
+        token: 0
+      }.to_json
+    end
+    let(:valid_credentials) do
+      { name: user.name,
+        email: user.email,
+        password: user.password
+      }.to_json
+    end
+    let(:invalid_credentials) do
+      {
+       name: 'random',
+        email: Faker::Internet.email,
+        password: Faker::Internet.password
       }.to_json
     end
 
-    
+    let(:valid_params) do
+      {
+       name: user.name,
+        email: user.email,
+        password: user.password
+      }.to_json
+    end
     # returns auth token when request is valid
     context 'When request is valid' do
-      before { post '/auth/logout', params: valid_token, headers: headers }
+     
+      before { 
+        
+       # salt_record = Salt.where(user_id: user.id).take
+        #p salt_record
+        
+        post '/signup',params: valid_params, headers: headers 
+        salt_record =  Salt.where(user_id: user.id).take
+        msg2 = post '/auth/logout', params: {Authorization: salt_record.token}.to_json, headers: headers
+        
+      }
        
       it 'returns status code 200' do
+        
         expect(json['message']).not_to be_nil
+        expect(json['message']).to match("You have succesfully logged out...")  
       end
     end
 
     # returns failure message when request is invalid
     context 'When request is invalid' do
-      before { post '/auth/logout', params: invalid_token, headers: headers }
-
+      before { 
+        
+        msg3 = post '/auth/logout', params: {Authorization: nil}.to_json, headers: headers 
+        }
       it 'returns a failure message' do
-        p json['message']
-        expect(json['message']).to match("Missing token")
+        
+        expect(json['message']).to match("Invalid token")
       end
     end
   end

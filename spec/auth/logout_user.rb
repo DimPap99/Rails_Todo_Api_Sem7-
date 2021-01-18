@@ -1,16 +1,16 @@
+
 require 'rails_helper'
 
-Rspec.describe LogoutUser do
-    let(:token) { invalidate(:token) }
-
-    subject(:valid_auth_obj) {described_class.new(token)}
-
-    subject(:invalid_auth_obj) {described_class.new(nil)}
+RSpec.describe LogoutUser do
+    let(:valid_token) { (0...50).map { ('a'..'z').to_a[rand(26)] }.join }
+    let(:invalid_token) { nil }
 
     describe '#call' do
         context 'when valid token' do
+            
             it 'returns a token invalidation message' do
-                message = valid_auth_obj.call
+                
+                message = LogoutUser.new(valid_token).call
                 expect(message).not_to be_nil
             end
 
@@ -18,8 +18,7 @@ Rspec.describe LogoutUser do
 
         context 'when invalid token' do
             it 'raises an authentication error' do
-                message = /invalid credentials/
-                expect {message}.to_be  /invalid credentials/
+                raise_error(ExceptionHandler::InvalidToken, /invalid token/)
             end
         end
 

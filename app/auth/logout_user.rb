@@ -4,16 +4,14 @@ class LogoutUser
     end
 
     def call()
-        JsonWebToken.invalidate(token: token)
+        if @token != nil
+        JsonWebToken.invalidate(token: @token)
+        return {message: "You have succesfully logged out...", status_code: '200'}.to_json
+        else
+            return {message: "Error occured", status_code: '422'}.to_json
+        end
+
     end
 
-    private 
-    attr_reader :user_id
-
-    def user
-       
-        user = User.find_by(email: email).id
-        return user if user && user.logout(user_id)
-        raise(ExceptionHandler::AuthenticationError, "Something went wrong")
-    end
+  
 end
