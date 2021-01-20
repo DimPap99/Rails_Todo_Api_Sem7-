@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/DimPap99/Rails_Todo_Api_Sem7-)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
